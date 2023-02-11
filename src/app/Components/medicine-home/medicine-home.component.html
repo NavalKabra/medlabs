@@ -1,0 +1,134 @@
+<!-- Header -->
+<div class="row py-5 text-center bg-primary text-light">
+    <div class="col">
+        <h3>Get Huge Savings on Medicines</h3>
+
+        <div class="d-flex flex-row justify-content-center bd-highlight mb-3">
+            <div class="p-2 bd-highlight"><sub><i class="bi bi-check-circle-fill me-2"></i>100% Genuine Medicines</sub></div>
+            <div class="p-2 bd-highlight"><sub><i class="bi bi-check-circle-fill me-2"></i>Trusted Pharmacies</sub></div>
+            <div class="p-2 bd-highlight"><sub><i class="bi bi-check-circle-fill me-2"></i>Doorstep Delivery</sub></div>
+            <div class="p-2 bd-highlight"><sub><i class="bi bi-check-circle-fill me-2"></i>Store Pickup</sub></div>
+          </div>
+    </div>
+</div>
+
+
+<!-- Search Bar -->
+<div class="row m-auto text-center searchBox" style="width: 62rem">
+    <div class="input-group flex-nowrap rounded-pill">
+        <button class="btn btn-outline-secondary bg-body dropdown-toggle py-3 shadow border-0" type="button" data-bs-toggle="modal" aria-expanded="false" data-bs-target="#pincodeModal" *ngIf="isPinCodeAvailable">{{pincodeDetails.pincodeCity}} &nbsp; {{pincodeDetails.pincode}} </button>
+        <span class="btn btn-outline-secondary bg-body dropdown-toggle py-3 shadow border-0" type="button" data-bs-toggle="modal" aria-expanded="false" *ngIf="!isPinCodeAvailable" data-bs-target="#pincodeModal">Select Location</span>
+        <input type="text" class="form-control shadow border-0" placeholder="Search Medicines" aria-label="Recipient's username" aria-describedby="button-addon2">
+        <button class="btn btn-outline bg-body text-primary shadow border-0 me-3" type="button" id="button-addon2"><i class="bi bi-search me-3"></i>Search</button>
+      </div>
+</div>
+
+<!-- Order meds adv -->
+<div class="container py-2 mt-2 w-75">
+    <div class="row">
+        <img src="https://www.medibuddy.in/assets/banners/medicine-page.webp" class="" alt="">
+    </div>
+</div>
+
+<!-- Slider Adv -->
+<app-med-home-ad-slider></app-med-home-ad-slider>
+
+<!-- Top Deals -->
+<app-top-deals> </app-top-deals>
+
+
+<!-- Order Meds thr Prescription  -->
+<div class="container py-3 mt-4 w-75">
+    <div class="fs-3">Order Medicines through Prescription</div>
+</div>
+
+<div class="container w-75">
+    <div class="row mx-auto d-flex justify-content-between">
+        <div class=" card col-md-5 d-flex flex-row justify-content-center my-4 shadow border-0 rounded-4" style="width: 34rem;">
+            <div class="col-md-8">
+                <div class="card-body my-2">
+                    <p class="card-text">Upload Prescription to place order</p>
+                    <p class="card-text"><small class="text-muted">Upload only .jpg .png or .pdf files, size limit is 15 MB</small></p>
+                    <button type="button" class="btn btn-primary rounded-3 p-2 mb-3">
+                        <small>Order via Prescription</small><i class="bi bi-arrow-right fs-6 m-2"></i>
+                    </button>
+                    <p class="card-text"><small class="text-primary">How to Order?</small></p>
+                    
+                </div>
+            </div>
+            <div class="col-md-4">
+                <img src="https://www.medibuddy.in/assets/icons/medicine/rx.svg"
+                    class="img-fluid rounded-start w-50 m-4" alt="...">
+            </div>
+        </div>
+
+        <div class=" card col-md-5 d-flex flex-row justify-content-center my-4 shadow border-0 rounded-4" style="width: 34rem;">
+            <div class="col-md-8">
+                <div class="card-body">
+                    <p class="card-text">Don't have a Prescription?</p>
+                    <p class="card-text"><small class="text-muted">Consult Top Doctors Online and order medicines through valid prescriptions</small></p>
+                    <button type="button" class="btn btn-primary rounded-3 p-2 mb-3">
+                        <small>Start Consultation</small><i class="bi bi-arrow-right fs-6 m-2"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <img src="https://www.medibuddy.in/assets/icons/services/med-consultation.svg"
+                    class="img-fluid rounded-start w-75 m-4" alt="...">
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+<!-- Adv -->
+<div class="container mt-4" style="width: 75rem;">
+    <div class="row">
+        <img src="https://www.medibuddy.in/assets/banners/app-banner.webp" class="w-125" alt="">
+    </div>
+</div>
+
+
+<!-- Pincode Modal -->
+<div class="modal fade" id="pincodeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Set your location</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" #closeBtn></button>
+        </div>
+        <div class="modal-body">
+            <form class="row was-validated" no-validate>
+
+                <div class="col mx-2">
+                    <label for="validationCustom05" class="form-label">Pincode*</label>
+                    <input type="text" class="form-control" id="validationCustom05" name="pincode"
+                        minlength="6" maxlength="6" required [(ngModel)]="pincode" (ngModelChange)="getPackageDetailsByPincode()">
+                    <div class="invalid-feedback d-block mt-2 ms-1" id="validationCustom05Feedback" *ngIf="!isPinCodeAvailable; else elseBlock">
+                      We do not provide service in this city!
+                    </div>
+                    <ng-template #elseBlock>
+                        <div class="valid-feedback d-block mt-2 ms-3" id="validationCustom05Feedback">
+                            {{pincodeDetails.pincodeCity}}
+                        </div>
+                    </ng-template>
+                  </div>
+            </form>
+        </div>
+            <div class="d-grid">
+                <button class="btn btn-primary mx-4 my-3" type="button" [disabled]="!isPinCodeAvailable">Submit</button>
+            </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+

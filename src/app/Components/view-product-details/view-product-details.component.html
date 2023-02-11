@@ -1,0 +1,38 @@
+
+<div class="row py-1 bg-primary text-light">
+    <div class="col-md-2 text-end cursor fs-5">
+        <span class="me-2 fs-5 mt-5" routerLink="/medicines"> <b><i class="bi bi-arrow-left fw-bold fs-5"></i></b></span> Top Deals
+    </div>
+</div>
+<div class="row py-3 text-dark py-3" style="background-color:#f1f7fe;">
+    <div class="col-md-4 text-end ms-5">
+        Showing Medicine Availability and Price in <i class="bi bi-geo-alt"></i> 
+        <!-- {{pincodeDetails.pincodeCity}} &nbsp; {{pincodeDetails.pincode}} -->
+    </div>
+</div>
+
+
+<div class="container py-5 mt-4">
+    <div class="row">
+     <div class="col-md-5 mt-1 m-auto text-center shadow">
+      <img [src]="productDetails?.productImageSlug[0]" alt=""  width="300" height="280">
+     </div>
+     <div class="col-md-6 mt-6 me-4">
+        <p class="fs-5 fw-bold">HIMALAYA NEEM & TURMERIC SOAP 125GM</p>
+        <p class="mt-2 py-2 ms-1"><span class="fs-6 text-muted text-decoration-line-through">MRP &nbsp; ₹ {{productDetails?.actualPrice}} /*</span> <span class="ms-5 fs-5 fw-bolder">₹ {{productDetails?.discountPrice}} /-*</span> </p>
+        
+        <div class="row">
+          <div class="col-md-12 text-muted">Manufacturer Name - Reckitt Benckiser</div>
+          <div class="col-md-12 text-muted">Manufacturer Address - Reckitt Benckiser India Pvt. Ltd. DLF Cyber Park, 6th & 7th Floor (Tower C), 405 B, Udyog Vihar Phase 3, Sector 20, Gurugram, India, Pin Code: 122016</div>
+          <div class="col-md-12 text-muted">Country of Origin - India</div>  
+          <div class="col-md-12 text-muted">Expires on or After - Aug 2025</div>
+      </div>
+      <div class="row mt-3 text-start">
+          <div class="col">
+              <button type="button" class="btn btn-primary me-2">Add To Cart</button>
+              <button type="button" class="btn btn-outline-primary">Continue Shopping</button>
+          </div>
+      </div>
+      </div>
+    </div>
+  </div>
