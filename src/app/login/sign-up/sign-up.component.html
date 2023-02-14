@@ -1,0 +1,61 @@
+<div class="container">
+
+  <div class="alert alert-danger d-flex align-middle align-items-center" style="height:2.5rem ;" role="alert"
+    *ngIf="!isVerifyOtp && signUpForm.valid">
+    Mobile number verification is mandatory!
+  </div>
+
+  <form [formGroup]="signUpForm" (ngSubmit)="signUp()">
+    <div class="box">
+      <div class="inputBox mt-2 mb-3">
+        <input type="text" name="uName" required onkeyup="this.setAttribute('value', this.value);" value=""
+          formControlName="userName">
+        <label>Username</label>
+      </div>
+
+      <!-- Mobile No -->
+      <div class="input-group mb-5">
+        <input type="text" class="form-control" aria-label="mobNo" placeholder="Enter your Mobile No" required
+          onkeyup="this.setAttribute('value', this.value);" value="" formControlName="mobileNo">
+        <span class="input-group-text text-primary" *ngIf="!isVerifyOtp"><a class="p-1 text-decoration-none cursor"
+            (click)="getOtp()">Send OTP</a></span>
+        <span class="input-group-text text-success border border-success" *ngIf="isVerifyOtp"><i
+            class="bi bi-check2-circle"></i></span>
+      </div>
+
+      <div *ngIf="isGetOtp">
+        <div class="input-group ">
+          <input type="text" class="form-control" aria-label="mobNo" placeholder="OTP" required
+            onkeyup="this.setAttribute('value', this.value);" value="" #otp>
+          <span class="input-group-text text-primary"><a class="p-1 text-decoration-none cursor"
+              (click)="verifyOtp(otp.value)">Verify OTP</a></span>
+        </div>
+        <div class="py-1 ms-1"> <sub>OTP is valid for {{otpTimer}}</sub></div>
+      </div>
+
+      <div class="inputBox mt-3">
+        <input type="password" name="email" required onkeyup="this.setAttribute('value', this.value);" value=""
+          formControlName="password">
+        <label>Password</label>
+      </div>
+
+      <div class="col-12">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+          <label class="form-check-label" for="invalidCheck">
+            Agree to terms and conditions
+          </label>
+          <div class="invalid-feedback">
+            You must agree before submitting.
+          </div>
+        </div>
+      </div>
+
+      <div class="d-grid gap-2">
+        <button class="btn btn-primary" type="submit" [disabled]="!(signUpForm.valid && isVerifyOtp)">Sign Up</button>
+      </div>
+
+    </div>
+  </form>
+
+</div>

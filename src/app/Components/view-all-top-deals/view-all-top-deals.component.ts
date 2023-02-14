@@ -9,7 +9,7 @@ import { HttpService } from 'src/app/core/http/http.service';
 export class ViewAllTopDealsComponent implements OnInit {
   TopDealsByCategory:any;
   constructor(private http:HttpService){}
-
+  
 
   ngOnInit(): void {
     this.getTopDealsByCategory()

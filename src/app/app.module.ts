@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './Components/header/header.component';
 import { FooterComponent } from './Components/footer/footer.component';
 import { PageerrorComponent } from './Components/pageerror/pageerror.component';
 import { HomeComponent } from './Components/home/home.component';
@@ -16,6 +15,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { ViewProductDetailsComponent } from './Components/view-product-details/view-product-details.component';
 import { MedHomeAdSliderComponent } from './Components/med-home-ad-slider/med-home-ad-slider.component';
 import { ViewAllTopDealsComponent } from './Components/view-all-top-deals/view-all-top-deals.component';
+import { LoginModule } from './login/login.module';
+import { SharedModule } from './shared/shared.module';
+import { HeaderComponent } from './Components/header/header.component';
 
 
 @NgModule({
@@ -37,7 +39,9 @@ import { ViewAllTopDealsComponent } from './Components/view-all-top-deals/view-a
     BrowserAnimationsModule,
     CarouselModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    LoginModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent],

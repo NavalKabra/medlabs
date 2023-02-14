@@ -17,5 +17,10 @@ export class HttpService {
     return this.http.get(url,{'headers':this.httpHeaders,'params':httpParams});
   }
 
+  postDetailsToServer(endPoint:string, requestBody:any){
+    let url=this.baseUrl+endPoint;
+    return this.http.post(url,requestBody, {'headers':this.httpHeaders});
+  }
+
 
 }
