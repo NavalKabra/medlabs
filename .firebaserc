@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "medskart-1ac35": {
+      "hosting": {
+        "medlab": [
+          "medskart-1ac35"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "medskart-1ac35"
+  }
+}

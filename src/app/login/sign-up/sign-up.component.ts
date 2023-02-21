@@ -14,8 +14,11 @@ export class SignUpComponent implements OnInit {
   isVerifyOtp: boolean = false;
   otpGenerated!:number;
   otpTimer!:number;
+  isSignUpSuccess:boolean=false;
   sub!:Subscription;
 
+  otpMessage:boolean=false;
+  signUpComplete:boolean=false;
   signUpForm!: FormGroup;
   constructor(private fb: FormBuilder,private http:HttpService) { }
 
@@ -26,8 +29,8 @@ export class SignUpComponent implements OnInit {
   createSignUpForm() {
     this.signUpForm = this.fb.group({
       'userName': ['', [Validators.required]],
-      'mobileNo': ['', [Validators.required,Validators.maxLength(10),Validators.minLength(10)]],
-      'password': ['', [Validators.required]],
+      'mobileNo': ['', [Validators.required,Validators.pattern('[0-9]{10}')]],
+      'password': ['', [Validators.required,Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{7,}')]],
       'isMobileNoVerified': [false, []]
     })
   }
@@ -36,7 +39,7 @@ export class SignUpComponent implements OnInit {
     this.isGetOtp = true; 
     // generate 4 digit randome otp
     this.otpGenerated = Math.floor(1000 + Math.random() * 9000);
-    console.log(this.otpGenerated);
+    alert(this.otpGenerated);
 
     // 
     var emittedNo = interval(1000);
@@ -44,6 +47,7 @@ export class SignUpComponent implements OnInit {
     this.otpTimer = 60 - res;
     if (this.otpTimer == 0){
       this.sub.unsubscribe();
+      this.otpMessage=true;
     }
     })
 
@@ -61,10 +65,18 @@ export class SignUpComponent implements OnInit {
     if(this.isVerifyOtp){
       console.log(this.signUpForm.value);
       this.http.postDetailsToServer('users',this.signUpForm.value).subscribe((response:any)=>{
-        if(response && response.length > 0){
+        if(response){
+          this.isSignUpSuccess=true;
           console.log(response);
+          this.signUpForm.reset()
+          
+        }else{
+          this.isSignUpSuccess=false;
         }
       })
     } 
+  }
+  ngOnDestroy(){
+    this.sub.unsubscribe();
   }
 }

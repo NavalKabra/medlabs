@@ -18,6 +18,9 @@ import { ViewAllTopDealsComponent } from './Components/view-all-top-deals/view-a
 import { LoginModule } from './login/login.module';
 import { SharedModule } from './shared/shared.module';
 import { HeaderComponent } from './Components/header/header.component';
+import { CartModule } from './cart/cart.module';
+import { ConfirmOrderComponent } from './cart/confirm-order/confirm-order.component';
+
 
 
 @NgModule({
@@ -31,7 +34,9 @@ import { HeaderComponent } from './Components/header/header.component';
     TopDealsComponent,
     ViewProductDetailsComponent,
     MedHomeAdSliderComponent,
-    ViewAllTopDealsComponent
+    ViewAllTopDealsComponent,
+    ConfirmOrderComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -41,7 +46,8 @@ import { HeaderComponent } from './Components/header/header.component';
     FormsModule,
     HttpClientModule,
     LoginModule,
-    SharedModule
+    SharedModule,
+    CartModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

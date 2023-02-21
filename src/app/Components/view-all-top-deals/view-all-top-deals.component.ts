@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CartService } from 'src/app/cart/cart.service';
 import { HttpService } from 'src/app/core/http/http.service';
+import { SharedService } from 'src/app/shared/service/shared.service';
 
 @Component({
   selector: 'app-view-all-top-deals',
@@ -8,7 +10,7 @@ import { HttpService } from 'src/app/core/http/http.service';
 })
 export class ViewAllTopDealsComponent implements OnInit {
   TopDealsByCategory:any;
-  constructor(private http:HttpService){}
+  constructor(private http:HttpService, private cart:CartService, private shared:SharedService){}
   
 
   ngOnInit(): void {
@@ -23,5 +25,8 @@ export class ViewAllTopDealsComponent implements OnInit {
     })
   }
 
+  addToCart(product: any) {
+    this.cart.addSelectItemToCart(product);
+   }
 
 }

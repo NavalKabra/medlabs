@@ -20,7 +20,7 @@ export class AuthenticationService {
     var token: any = "";
     token = localStorage.getItem('authToken');
     if (token) {
-      return token
+      return token;
     }
     return token;
   }

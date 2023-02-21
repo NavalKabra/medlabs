@@ -1,45 +1,57 @@
 <!-- header nav -->
+
 <body class="sticky-top">
-    <div class="row bg-link p-2 d-flex align-items-center justify-content-center" style="box-shadow: 0 0 10px #d5d5d5;">
-        <div class="col-md-3 d-flex align-items-center" routerLink="/home">
-            <img src="./assets/Images/logo2.png" alt="logo" width="30"  class="d-inline-block align-text-top" >
-            <a href="" class="navbar-brand ms-1" routerLink="/home"><span class="fs-4 text-primary">Meds</span><span class="fs-4" style="color:rgb(77, 175, 12);">Kart</span></a>
-        </div>
-        <div class="col-md-8 text-end align-items-center text-primary">
-            <a href="" class="navbar-brand ms-5">About Us</a>
-            <a href="" class="navbar-brand ms-5" data-bs-toggle="modal" data-bs-target="#loginModal" #loginBtn>Login</a>
+  <div class="row bg-link p-2 d-flex align-items-center justify-content-center" style="box-shadow: 0 0 10px #d5d5d5;">
+    <div class="col-md-3 d-flex align-items-center">
+      <img src="./assets/Images/logo2.png" alt="logo" width="30" class="d-inline-block align-text-top cursor" routerLink="/home">
+      <a href="" class="navbar-brand ms-1" routerLink="/home"><span class="fs-4 text-primary">Meds</span><span
+          class="fs-4" style="color:rgb(77, 175, 12);">Kart</span></a>
+    </div>
+    <div class="col-md-8 text-end align-items-center text-primary cursor">
+      <a href="" class="navbar-brand ms-5">About Us</a>
 
-            <a class="navbar-brand ms-4  dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"
-              *ngIf="isLoginSuccess">{{loggedUserDetails?.userName}} &nbsp; <span><i class="fa-solid fa-user"></i></span></a>
-            <ul class="dropdown-menu" *ngIf="isLoginSuccess">
-              <li><a class="dropdown-item" (click)="onLogOut()">Logout</a></li>
-            </ul>
-            
-            <a href="" class="navbar-brand ms-5"><i class="bi bi-cart-plus me-1"></i>Cart</a>
-            <a href="" class="navbar-brand ms-5"><i class="bi bi-coin me-1"></i >Offers</a>
-        </div>
-    </div>  
-</body>
+      <a href="" class="navbar-brand ms-5" *ngIf="!isLoginSuccess" data-bs-toggle="modal" data-bs-target="#loginModal" #loginBtn>Login | Signup</a>
+      <!-- <a href="" class="navbar-brand ms-2" *ngIf="isLoginSuccess" >{{loggedUserDetails.userName}} </a> -->
 
-  
-  <!-- Login Modal -->
-  <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header p-3">
-          <h5 class="modal-title" id="exampleModalLabel">User Account </h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <app-sign-up *ngIf="actionName == 'SignUp'"></app-sign-up>
-            <app-login *ngIf="actionName == 'SignIn'"></app-login>
-        </div>
-        <div class="d-grid gap-2">
-          <button class="btn btn-primary" type="button" *ngIf="actionName =='SignIn'" (click)="changeAction('SignUp')">Sign-Up</button>
-          <button class="btn btn-primary" type="button" *ngIf="actionName =='SignUp'" (click)="changeAction('SignIn')">Login</button>
-        </div>
-          
-        
-      </div>
+      <a class="navbar-brand ms-5  dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"
+        *ngIf="isLoginSuccess"> Hi, {{loggedUserDetails?.userName}}<span><i class="fa-solid fa-user ms-1"></i></span></a>
+      <ul class="dropdown-menu" *ngIf="isLoginSuccess">
+        <li><a class="dropdown-item" (click)="onLogOut()">Logout</a></li>
+      </ul>
+
+      <a class="navbar-brand ms-5" (click)="redirectToCart()"><i class="bi bi-cart-plus fs-5 me-2 position-relative">
+        <span class="bg-warning text-dark border border-light rounded-circle cart-count">{{cardCount | async}}</span>
+        </i> Cart</a>
+
+      <a href="" class="navbar-brand ms-5"><i class="bi bi-coin me-1"></i>Offers</a>
     </div>
   </div>
+</body>
+
+
+<!-- Login Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header p-3 col-12">
+        <div class="modal-title fs-5" id="exampleModalLabel">User {{actionName}}&nbsp;Form </div>
+        <!-- <span><sub>Get access to your orders, lab tests & doctor consultations</sub></span> -->
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" #closeBtn></button>
+      </div>
+      <div class="modal-body">
+        <app-sign-up *ngIf="actionName == 'SignUp'"></app-sign-up>
+        <app-login *ngIf="actionName == 'SignIn'" (signInSuccess)="handleLoginSuccess($event)"></app-login>
+      </div>
+
+
+      <div class="d-grid gap-2">
+        <div class="mx-4 mb-4" *ngIf="actionName =='SignIn'" (click)="changeAction('SignUp')">
+          <sub class="text-center p-1" >New Customer? <span class="text-primary">Start here.</span></sub>
+          <button class="btn btn-primary col-12" type="button" *ngIf="actionName =='SignIn'" (click)="changeAction('SignUp')">Sign-Up</button>
+        </div>
+        <button class="btn btn-primary m-4" type="button" *ngIf="actionName =='SignUp'" (click)="changeAction('SignIn')">Login</button>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { CartService } from 'src/app/cart/cart.service';
 import { HttpService } from 'src/app/core/http/http.service';
+import { SharedService } from 'src/app/shared/service/shared.service';
 
 @Component({
   selector: 'app-top-deals',
@@ -10,7 +12,7 @@ import { HttpService } from 'src/app/core/http/http.service';
 export class TopDealsComponent implements OnInit {
   topDeals:any[]=[];
 
-  constructor(private http:HttpService){}
+  constructor(private http:HttpService, private cart:CartService, private shared:SharedService){}
 
   ngOnInit(): void {
     this.getTopDeals();
@@ -49,8 +51,8 @@ export class TopDealsComponent implements OnInit {
     nav: true
   }
 
-  
-
-
+  addToCart(product: any) {
+   this.cart.addSelectItemToCart(product);
+  }
 
 }

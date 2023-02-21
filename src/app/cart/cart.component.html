@@ -1,0 +1,64 @@
+<div class="row py-1 bg-primary text-light" routerLink="/medicines">
+    <div class="col-md-2 text-end cursor fs-5">
+        <span class="me-2 fs-5 mt-5"> <b><i
+                    class="bi bi-arrow-left fw-bold fs-5"></i></b></span>
+        Your Cart
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-6 py-3 rounded-5" style="box-shadow: 0 0 15px rgb(24 24 24 / 16%);">
+         <span class="ms-2 fs-5">Cart items  </span><span class="ms-2 text-primary" style="font-size: 13px;">{{orderObj.products.length}} items</span>
+          <div class="card my-3 mx-2 border-0 py-2 card-block rounded-5" *ngFor="let item of orderObj.products;let i=index" style="box-shadow: 0 0 20px 0 #e8e8e8;">
+             <div class="card-body row">
+               <div class="col-md-8 ms-2 description">
+                    <p class="card-text">{{item.description}}</p>
+                    <p class="card-text text-muted" style="font-size: 12px;">{{item.brand}}</p>
+                    <p class="card-text text-muted" style="font-size: 10px;">{{item.type}}</p>
+               </div> 
+               <div class="col-md-3 text-end" style="font-size: 13px;">
+                  <p class="card-text">₹ {{item.discountPrice}} &nbsp;<span class="text-decoration-line-through">MRP&nbsp; ₹ {{item.actualPrice}}</span></p>
+                  <p><i class="bi bi-dash-circle text-primary cursor fs-5" (click)="quantityChange('Negative',i)"></i> &nbsp;{{item.quantity}}&nbsp;<i class="bi bi-plus-circle text-primary cursor fs-5" (click)="quantityChange('Positive',i)"></i></p>
+               </div>
+             </div>   
+          </div>
+      </div>
+      <div class="col-md-4 ms-4 py-2 rounded-5" style="box-shadow: 0 0 15px rgb(24 24 24 / 16%); height: 16rem;" >
+          <div class="card card-block border-0">
+            <div class="card-body">
+                  <span class="ms-2 mb-2 fs-5">Payment Details</span>
+                   <hr class="mt-2 ms-2">
+                   <div class="row">
+                        <div class="col-md-5 ms-2" style="font-size: 14px;">
+                           <p class="card-text">MRP Total</p>
+                           <p class="card-text">Discounts</p>  
+                        </div>
+
+                        <div class="col-md-6 text-end">
+                             <p class="card-text fs-6">₹ {{orderObj.totalAmount}} /-*</p>
+                             <p class="card-text fs-6"> - ₹ {{orderObj.totalDiscount}} /-*</p>
+                        </div>
+                   </div>
+                   <hr class="mt-2 ms-2">
+                   <div class="row">
+                      <div class="col-md-6">
+                       <p class="card-text text-muted lh-1" style="font-size: 13px;">Amount to Pay</p>
+                       <p class="fs-5 lh-1">₹ {{orderObj.finalAmount}} /-*</p> 
+                      </div>
+                      <div class="col-md-5 my-1 text-center text-light bg-primary rounded-4 border py-3 cursor" routerLink="/booking-details" (click)="checkout()">
+                             Checkout
+                      </div>
+                   </div>
+                   
+            </div>
+
+          </div>
+          <div class="mt-4" style="font-size: 12px;">
+            <div class="text-danger fw-bold">Please Note:</div>
+            <div>Price may slightly vary on the payment page basis on the delivery mode you selected</div>
+          </div>
+      </div>
+    </div>
+   </div>

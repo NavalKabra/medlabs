@@ -1,0 +1,5 @@
+.rb-gradient{
+    background: linear-gradient(104deg,#4285f4 4%,#db4437 35%);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

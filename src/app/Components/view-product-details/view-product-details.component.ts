@@ -1,6 +1,7 @@
 import { HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CartService } from 'src/app/cart/cart.service';
 import { HttpService } from 'src/app/core/http/http.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { HttpService } from 'src/app/core/http/http.service';
 })
 export class ViewProductDetailsComponent implements OnInit {
 
-  productDetails:any;
+  productDetails:any
   constructor(private route:ActivatedRoute,private http:HttpService) {
     console.log('Hi')
    }
@@ -22,16 +23,15 @@ export class ViewProductDetailsComponent implements OnInit {
     }
   }
 
-  getProductDetailsByDrugCode(drug_code:string){
-    const params:HttpParams = new HttpParams()
-                              .set('drugCode',drug_code);
-    
-    this.http.getDetailsFromServer('top-deals',params).subscribe((response:any)=>{
-      if(response && response.length > 0){
+  getProductDetailsByDrugCode(drug_code: string) {
+    const params: HttpParams = new HttpParams()
+      .set('drugCode', drug_code);
+
+    this.http.getDetailsFromServer('top-deals', params).subscribe((response: any) => {
+      if (response && response.length > 0) {
         this.productDetails = response[0]
       }
-    })                          
-    
-    } 
-
+    })
+  } 
+ 
 }

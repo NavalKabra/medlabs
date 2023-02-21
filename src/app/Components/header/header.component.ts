@@ -1,4 +1,4 @@
-import { Component, DoCheck, ElementRef, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { AuthenticationService } from 'src/app/core/authentication/authentication.service';
@@ -7,14 +7,15 @@ import { SharedService } from 'src/app/shared/service/shared.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  actionName:string="SignIn";
+ actionName:string="SignIn";
  loggedUserDetails:any;
- cardCount!:any
- isLoginSuccess:boolean = false ;
+ cardCount!:Observable<number>
+ isLoginSuccess:boolean = false;
  sub!:Subscription
+ 
  @ViewChild('closeBtn',{'read':ElementRef}) closeBtn!:ElementRef;
  @ViewChild('loginBtn',{'read':ElementRef}) loginBtn!:ElementRef;
   constructor(private auth:AuthenticationService,private shared:SharedService,private router:Router) { }
@@ -22,13 +23,11 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.loggedUserDetails = this.auth.getUser();
     if(this.auth.getToken()){
-      this.isLoginSuccess = true ;
+      this.isLoginSuccess=true;
     }
-
     this.cardCount = this.shared.cartObs;
   }
 
-  
   changeAction(action:string){
     this.actionName = action;
   }
@@ -37,7 +36,6 @@ export class HeaderComponent implements OnInit {
     if(flag){
       this.isLoginSuccess = true ;
       this.loggedUserDetails = this.auth.getUser();
-      this.cardCount
       this.closeBtn.nativeElement.click();
     }
   }
@@ -60,4 +58,4 @@ export class HeaderComponent implements OnInit {
     this.sub.unsubscribe();
   }
 
-}
+} 

@@ -6,3 +6,13 @@ a:hover {
     letter-spacing: 1px;
     color: rgb(77, 175, 12);
 }
+
+.cart-count{
+    position:absolute;
+    top: -0.4rem;
+    left: 0.7rem;
+    font-size: 11px;
+    font-style: normal;
+    padding-inline: 4px;
+    font-weight: bold;
+}
